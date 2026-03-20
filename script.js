@@ -3,8 +3,8 @@ import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers
 // ১. অফলাইন সাপোর্ট ক্যাশিং কনফিগারেশন
 env.allowLocalModels = true;
 env.allowRemoteModels = false;
-// env.useBrowserCache = true;
-env.useBrowserCache = false;
+// এটি অবশ্যই true থাকতে হবে যাতে একবার ডাউনলোড হলে ব্রাউজার সেটা মনে রাখে
+env.useBrowserCache = true;
 env.localModelPath = '';
 
 let classifier;
@@ -41,6 +41,8 @@ async function init() {
         classifier = await pipeline('sentiment-analysis', 'onnx_model_new', {
             model_file: 'onnx/model.onnx',
             quantized: false,
+            // এখানে cache_dir ব্যবহার করলে ব্রাউজার ইন্ডেক্সডডিবি-তে ফাইলটি রাখবে
+            cache_dir: 'models-cache',
             progress_callback: (info) => {
                 if (info.status === 'progress') {
                     statusText.textContent = `ডাউনলোড হচ্ছে: ${info.progress.toFixed(1)}%`;
