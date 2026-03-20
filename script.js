@@ -3,7 +3,8 @@ import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers
 // ১. অফলাইন সাপোর্ট ক্যাশিং কনফিগারেশন
 env.allowLocalModels = true;
 env.allowRemoteModels = false;
-env.useBrowserCache = true;
+// env.useBrowserCache = true;
+env.useBrowserCache = false;
 env.localModelPath = '';
 
 let classifier;
