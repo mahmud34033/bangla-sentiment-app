@@ -38,7 +38,7 @@ async function init() {
     try {
         statusText.textContent = "মডেল চেক করা হচ্ছে...";
         classifier = await pipeline('sentiment-analysis', 'onnx_model_new', {
-            model_file: 'model.onnx',
+            model_file: 'onnx/model.onnx',
             quantized: false,
             progress_callback: (info) => {
                 if (info.status === 'progress') {
